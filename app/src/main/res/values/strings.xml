@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Run</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_user_history">User History</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
+    <string name="timer">00:00:00</string>
+    <string name="title_activity_user_history_detail">UserHistoryDetail</string>
+    <string name="myTrips">My Trips</string>
+    <string name="distanceUnit">km</string>
+    <string name="averageSpeedUnit">km/h</string>
+    <string name="min">min</string>
+    <string name="running">Running..</string>
+
+</resources>

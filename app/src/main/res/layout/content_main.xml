@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.bishal.fitness.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#BF1d5179">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-45dp"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@+id/timer"
+            android:background="@drawable/running_icon"
+
+            />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/timer"
+            android:layout_alignLeft="@+id/startStopBtn"
+            android:layout_alignStart="@+id/startStopBtn"
+            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp"
+            android:padding="5dp"
+            android:text="@string/start"
+            android:textColor="#fff"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:padding="5dp"
+            android:text="00:00:00"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:id="@+id/speedometerImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/text_view_speed"
+            android:layout_toLeftOf="@+id/text_view_speed"
+            android:layout_toStartOf="@+id/text_view_speed"
+            android:background="@drawable/speedometer_icon" />
+
+        <TextView
+            android:id="@+id/text_view_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timer"
+            android:layout_marginRight="-7dp"
+            android:layout_toLeftOf="@+id/timer"
+            android:padding="5dp"
+            android:text="0.00 km/h"
+            android:textColor="#fff"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:id="@+id/footstepsImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timer"
+            android:layout_toEndOf="@+id/timer"
+            android:layout_toRightOf="@+id/timer"
+            android:background="@drawable/footsteps_icon" />
+
+        <TextView
+            android:id="@+id/text_view_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/footstepsImage"
+            android:layout_toEndOf="@+id/footstepsImage"
+            android:layout_toRightOf="@+id/footstepsImage"
+            android:padding="5dp"
+            android:text="0.00 km"
+            android:textColor="#fff"
+            android:textSize="17sp" />
+
+        <RelativeLayout
+            android:id="@+id/user_history_btn"
+            android:layout_width="95dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/text_view_speed"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toLeftOf="@+id/startStopBtn"
+            android:background="@drawable/custom_boarder"
+            android:onClick="userHistory">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/my_trip_icon" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/startStopBtn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/timer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/button_background"
+            android:text="Start"
+            android:textColor="#fff" />
+
+        <RelativeLayout
+            android:id="@+id/emergencyCallBtn"
+            android:layout_width="95dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/text_view_distance"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/startStopBtn"
+            android:layout_toRightOf="@+id/startStopBtn"
+            android:background="@drawable/custom_boarder">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/phone_call" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
