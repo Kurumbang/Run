@@ -13,37 +13,83 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
     <RelativeLayout
+        android:id="@+id/upArrow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#BF1d5179">
+        android:onClick="upArrowTapped"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/up_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/controlBoard"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="#BFd6d6d6"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:id="@+id/downArrow"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:onClick="downArrowTapped">
+
+            <ImageView
+                android:id="@+id/downArrowIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/down_arrow" />
+
+
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="-45dp"
-            android:layout_marginTop="20dp"
-            android:layout_toLeftOf="@+id/timer"
-            android:background="@drawable/running_icon"
 
-            />
+            android:src="@drawable/running_icon"
+            android:layout_below="@+id/downArrow"
+            android:layout_alignLeft="@+id/timer"
+            android:layout_alignStart="@+id/timer" />
 
         <TextView
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/timer"
-            android:layout_alignLeft="@+id/startStopBtn"
-            android:layout_alignStart="@+id/startStopBtn"
-            android:layout_marginLeft="13dp"
-            android:layout_marginStart="13dp"
+            android:layout_alignEnd="@+id/timer"
+            android:layout_alignRight="@+id/timer"
+            android:layout_toRightOf="@+id/imageView"
+            android:gravity="center"
             android:padding="5dp"
             android:text="@string/start"
-            android:textColor="#fff"
+            android:textColor="@color/textColor"
             android:textSize="17sp" />
 
         <TextView
@@ -54,59 +100,76 @@
             android:layout_centerHorizontal="true"
             android:padding="5dp"
             android:text="00:00:00"
-            android:textColor="#fff"
+            android:textColor="@color/textColor"
             android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/speedometerImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/text_view_speed"
-            android:layout_toLeftOf="@+id/text_view_speed"
-            android:layout_toStartOf="@+id/text_view_speed"
-            android:background="@drawable/speedometer_icon" />
+            android:layout_above="@+id/text_view_distance"
+            android:layout_alignEnd="@+id/user_history_btn"
+            android:layout_alignLeft="@+id/user_history_btn"
+            android:layout_alignRight="@+id/user_history_btn"
+            android:layout_alignStart="@+id/user_history_btn"
+            android:src="@drawable/speedometer_icon" />
 
         <TextView
             android:id="@+id/text_view_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/timer"
-            android:layout_marginRight="-7dp"
+            android:layout_below="@+id/speedometerImage"
             android:layout_toLeftOf="@+id/timer"
+            android:layout_toStartOf="@+id/timer"
+            android:gravity="center"
             android:padding="5dp"
-            android:text="0.00 km/h"
-            android:textColor="#fff"
+            android:text="00.00 KM/H"
+            android:textColor="@color/textColor"
             android:textSize="17sp" />
 
         <ImageView
             android:id="@+id/footstepsImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/text_view_distance"
+            android:layout_alignRight="@+id/text_view_distance"
             android:layout_below="@+id/timer"
-            android:layout_toEndOf="@+id/timer"
             android:layout_toRightOf="@+id/timer"
-            android:background="@drawable/footsteps_icon" />
+            android:src="@drawable/footsteps_icon" />
 
         <TextView
             android:id="@+id/text_view_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/footstepsImage"
-            android:layout_toEndOf="@+id/footstepsImage"
-            android:layout_toRightOf="@+id/footstepsImage"
+            android:layout_alignEnd="@+id/emergencyCallBtn"
+            android:layout_alignLeft="@+id/emergencyCallBtn"
+            android:layout_alignRight="@+id/emergencyCallBtn"
+            android:layout_alignStart="@+id/emergencyCallBtn"
+            android:layout_below="@+id/footstepsImage"
+            android:gravity="center"
             android:padding="5dp"
-            android:text="0.00 km"
-            android:textColor="#fff"
+            android:text="00.00 KM"
+            android:textColor="@color/textColor"
             android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/startStopBtn"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/text_view_speed"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_background"
+            android:text="START"
+            android:textColor="@color/textColor" />
 
         <RelativeLayout
             android:id="@+id/user_history_btn"
             android:layout_width="95dp"
             android:layout_height="50dp"
-            android:layout_below="@+id/text_view_speed"
-            android:layout_marginRight="30dp"
+            android:layout_alignEnd="@+id/text_view_speed"
+            android:layout_alignRight="@+id/text_view_speed"
+            android:layout_alignTop="@+id/startStopBtn"
             android:layout_marginTop="15dp"
-            android:layout_toLeftOf="@+id/startStopBtn"
             android:background="@drawable/custom_boarder"
             android:onClick="userHistory">
 
@@ -118,27 +181,13 @@
                 android:background="@drawable/my_trip_icon" />
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/startStopBtn"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_below="@+id/timer"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="35dp"
-            android:background="@drawable/button_background"
-            android:text="Start"
-            android:textColor="#fff" />
-
         <RelativeLayout
             android:id="@+id/emergencyCallBtn"
             android:layout_width="95dp"
             android:layout_height="50dp"
-            android:layout_below="@+id/text_view_distance"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/startStopBtn"
-            android:layout_toRightOf="@+id/startStopBtn"
+            android:layout_alignTop="@+id/user_history_btn"
+            android:layout_toEndOf="@+id/timer"
+            android:layout_toRightOf="@+id/timer"
             android:background="@drawable/custom_boarder">
 
             <ImageView
@@ -148,6 +197,7 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/phone_call" />
         </RelativeLayout>
+
 
     </RelativeLayout>
 

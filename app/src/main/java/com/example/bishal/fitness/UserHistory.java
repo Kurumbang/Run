@@ -1,5 +1,6 @@
 package com.example.bishal.fitness;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,9 +24,11 @@ public class UserHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_history);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Typeface mytypeface = Typeface.createFromAsset(this.getAssets(),"Oswald-Stencil.ttf");
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         title = (TextView) toolbar.findViewById(R.id.title);
         title.setText(R.string.myTrips);
+        title.setTypeface(mytypeface);
 
         dbHandler = new MyDataBaseHandler(this);
 

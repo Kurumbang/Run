@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     app:cardElevation="2dp"
     android:id="@+id/cardView"
-    app:cardBackgroundColor="#707070">
+    app:cardBackgroundColor="#fff">
 
 
     <RelativeLayout
@@ -18,31 +18,42 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="30-4-2016"
-            android:textColor="#fff"
+            android:textColor="@color/textColor"
             android:textSize="20sp"
             android:id="@+id/date"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="26dp"
-            android:layout_marginStart="26dp" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp" />
         <TextView
             android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10 Km"
-            android:padding="7dp"
-            android:textColor="#fff"
+            android:text="10.00"
+            android:textColor="@color/textColor"
             android:layout_below="@+id/date"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"/>
+        <TextView
+            android:id="@+id/kmLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KM"
+            android:textSize="20sp"
+            android:textColor="@color/textColor"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/distance"
+            android:layout_toEndOf="@+id/distance" />
 
         <ImageView
             android:id="@+id/imageViewArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/right_arroww"
+            android:background="@drawable/right_arrow"
             android:layout_marginRight="30dp"
             android:layout_marginEnd="30dp"
             android:layout_centerVertical="true"

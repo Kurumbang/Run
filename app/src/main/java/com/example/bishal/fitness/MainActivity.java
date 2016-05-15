@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.osmdroid.DefaultResourceProxyImpl;
@@ -40,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean startStopFlag = false;
     private static final String TAG = "com.example.bishal.fitness";
     private Intent intent;
-    private TextView displaySpeed, displayDistance, status;
+    private TextView displaySpeed, displayDistance, status, timer;
     private Button startStopbtn;
     private OverlayItem olItem;
     private Drawable marker;
-
+    Typeface mytypeface;
     double currentLatitude, currentLongitude, lastLatitude, lastLongitude, distanceTravelled;
     float currentSpeed;
     MyDataBaseHandler dbHandler;
@@ -54,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
     SimpleDateFormat simpleDateFormat;
     String start_Time;
     long startTime;
+    Animation slideUp, slideDown;
 
+    RelativeLayout controlBoard, upArrow, downArrow;
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -69,13 +76,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         init();
-        displayLocationOnTheMap(lastLatitude,lastLongitude);
+        displayLocationOnTheMap(lastLatitude, lastLongitude);
 
         startStopbtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkStartStopFlag()){
+                if (checkStartStopFlag()) {
                     start_Time = simpleDateFormat.format(new Date());
                     startTime = System.currentTimeMillis();
                     intent = new Intent(getApplicationContext(), MyLocationService.class);
@@ -83,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     startStopbtn.setText(R.string.stop);
                     status.setText(R.string.running);
                     registerReceiver(broadcastReceiver, new IntentFilter(MyLocationService.BROADCAST_ACTION));
-                }else{
+                } else {
                     stopService(intent);
                     startStopbtn.setText(R.string.start);
                     status.setText(R.string.start);
@@ -91,13 +99,13 @@ public class MainActivity extends AppCompatActivity {
                     unregisterReceiver(broadcastReceiver);
                     String stop_Time = simpleDateFormat.format(new Date());
                     long total = TimeUnit.MILLISECONDS.toMinutes(System.currentTimeMillis() - startTime);
-                    float timeTakenInHours = (float)total/60;
+                    float timeTakenInHours = (float) total / 60;
                     float averageSpeed = (float) distanceTravelled / timeTakenInHours;
 
                     UserData userData = new UserData(
-                            date, String.valueOf(form.format(distanceTravelled)) + "km",
-                            String.valueOf(form.format(averageSpeed))+ "km/h", start_Time,
-                            stop_Time,String.valueOf(total)+ "min");
+                            date, String.valueOf(form.format(distanceTravelled)),
+                            String.valueOf(form.format(averageSpeed)), start_Time,
+                            stop_Time, String.valueOf(total));
                     dbHandler.addUserData(userData);
                     dbHandler.close();
 
@@ -108,17 +116,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void emergencyCall(View view){
+    public void emergencyCall(View view) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:12345"));
         startActivity(callIntent);
     }
 
-    public void userHistory(View view){
+    public void userHistory(View view) {
         Intent userHisory = new Intent(getApplicationContext(), UserHistory.class);
         startActivity(userHisory);
     }
-    public void init(){
+
+    public void init() {
+        mytypeface = Typeface.createFromAsset(this.getAssets(), "Oswald-Stencil.ttf");
         mMapView = (MapView) findViewById(R.id.map);
         if (mMapView != null) {
             mMapView.setTileSource(TileSourceFactory.MAPNIK);
@@ -128,24 +138,36 @@ public class MainActivity extends AppCompatActivity {
         }
         mapController.setZoom(15);
         mResourceProxy = new DefaultResourceProxyImpl(getApplicationContext());
-        displaySpeed = (TextView)findViewById(R.id.text_view_speed);
-        displayDistance = (TextView)findViewById(R.id.text_view_distance);
-        startStopbtn = (Button)findViewById(R.id.startStopBtn);
-        status = (TextView)findViewById(R.id.status);
+        displaySpeed = (TextView) findViewById(R.id.text_view_speed);
+        displaySpeed.setTypeface(mytypeface);
+        displayDistance = (TextView) findViewById(R.id.text_view_distance);
+        displayDistance.setTypeface(mytypeface);
+        startStopbtn = (Button) findViewById(R.id.startStopBtn);
+        startStopbtn.setTypeface(mytypeface);
+        status = (TextView) findViewById(R.id.status);
+        status.setTypeface(mytypeface);
+        timer = (TextView) findViewById(R.id.timer);
+        timer.setTypeface(mytypeface);
         marker = this.getResources().getDrawable(R.drawable.location);
+
+        controlBoard = (RelativeLayout) findViewById(R.id.controlBoard);
+        upArrow = (RelativeLayout) findViewById(R.id.upArrow);
+        downArrow = (RelativeLayout)findViewById(R.id.downArrow);
+        slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
+        slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
 
         dbHandler = new MyDataBaseHandler(getApplicationContext());
         date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         simpleDateFormat = new SimpleDateFormat("HH:mm");
     }
 
-    public boolean checkStartStopFlag(){
-        if(!startStopFlag){
+    public boolean checkStartStopFlag() {
+        if (!startStopFlag) {
             startStopFlag = true;
 
-        }else
+        } else
             startStopFlag = false;
-        return  startStopFlag;
+        return startStopFlag;
     }
 
     private void updateUI(Intent intent) {
@@ -166,7 +188,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public void displayLocationOnTheMap(double latitude, double longitude){
+
+    public void displayLocationOnTheMap(double latitude, double longitude) {
 
         GeoPoint currentLocation = new GeoPoint(latitude, longitude);
         mapController.setCenter(currentLocation);
@@ -183,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
                         // Toast.makeText(DemoMap.this, "Item '" + item.mTitle, Toast.LENGTH_LONG).show();
                         return true; // We 'handled' this event.
                     }
+
                     @Override
                     public boolean onItemLongPress(final int index,
                                                    final OverlayItem item) {
@@ -216,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -234,4 +259,22 @@ public class MainActivity extends AppCompatActivity {
         //registerReceiver(broadcastReceiver, new IntentFilter(MyLocationService.BROADCAST_ACTION));
     }
 
+    public void upArrowTapped(View view) {
+        upArrow.startAnimation(slideDown);
+        upArrow.setVisibility(View.GONE);
+        controlBoard.startAnimation(slideUp);
+        controlBoard.setVisibility(View.VISIBLE);
+        if(controlBoard.getVisibility()==View.VISIBLE){
+            downArrow.startAnimation(slideDown);
+            downArrow.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void downArrowTapped(View view) {
+        controlBoard.startAnimation(slideDown);
+        controlBoard.setVisibility(View.GONE);
+        upArrow.startAnimation(slideUp);
+        upArrow.setVisibility(View.VISIBLE);
+        downArrow.setVisibility(View.INVISIBLE);
+    }
 }

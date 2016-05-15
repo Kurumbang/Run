@@ -2,6 +2,7 @@ package com.example.bishal.fitness;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,10 +19,11 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     Context context;
     List<UserData>userData;
-
+    Typeface mytypeface;
     public MyAdapter(Context context, List<UserData>userData) {
         this.context = context;
         this.userData = userData;
+        mytypeface = Typeface.createFromAsset(context.getAssets(),"Oswald-Stencil.ttf");
     }
 
     @Override
@@ -62,13 +64,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView date, distance;
+        TextView date, distance, kmlabel;
         CardView cardView;
         ImageView imageView;
         public MyViewHolder(View itemView) {
             super(itemView);
             date = (TextView)itemView.findViewById(R.id.date);
+            date.setTypeface(mytypeface);
             distance = (TextView)itemView.findViewById(R.id.distance);
+            distance.setTypeface(mytypeface);
+            kmlabel = (TextView)itemView.findViewById(R.id.kmLabel);
+            kmlabel.setTypeface(mytypeface);
             imageView = (ImageView)itemView.findViewById(R.id.imageViewArrow);
             cardView = (CardView)itemView.findViewById(R.id.cardView);
         }
