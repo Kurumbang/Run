@@ -188,7 +188,8 @@
             android:layout_alignTop="@+id/user_history_btn"
             android:layout_toEndOf="@+id/timer"
             android:layout_toRightOf="@+id/timer"
-            android:background="@drawable/custom_boarder">
+            android:background="@drawable/custom_boarder"
+            android:onClick="emergencyCall">
 
             <ImageView
                 android:layout_width="wrap_content"

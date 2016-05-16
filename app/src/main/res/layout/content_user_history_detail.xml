@@ -12,280 +12,280 @@
     tools:context="com.example.bishal.fitness.UserHistoryDetail"
     tools:showIn="@layout/activity_user_history_detail">
 
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-        android:background="@drawable/divider_top_bottom"
-       android:id="@+id/distance_layout">
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="DISTANCE"
-           android:id="@+id/distanceLabel"
-           android:layout_centerHorizontal="true"
-           android:textColor="@color/textColor"
-           android:layout_marginTop="15dp"/>
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="15.00"
-           android:id="@+id/distance"
-           android:textSize="40sp"
-           android:textColor="@color/textColor"
-           android:layout_below="@+id/distanceLabel"
-           android:layout_centerHorizontal="true"
-           android:layout_marginBottom="15dp"/>
-       <TextView
-           android:id="@+id/km_label"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="KM"
-           android:textSize="20sp"
-           android:layout_alignBaseline="@+id/distance"
-           android:layout_alignBottom="@+id/distance"
-           android:layout_toRightOf="@+id/distance"
-           android:layout_toEndOf="@+id/distance" />
-       <ImageView
-           android:layout_width="40dp"
-           android:layout_height="40dp"
-           android:src="@drawable/distance_icon"
-           android:layout_marginRight="17dp"
-           android:layout_marginEnd="17dp"
-           android:layout_below="@+id/distanceLabel"
-           android:layout_toLeftOf="@+id/distanceLabel"
-           android:layout_toStartOf="@+id/distanceLabel"
-           android:id="@+id/distanceIcon" />
+    <RelativeLayout
+        android:id="@+id/distance_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/divider_top_bottom">
 
-   </RelativeLayout>
+        <TextView
+            android:id="@+id/distanceLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/distance"
+            android:textColor="@color/textColor" />
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/distanceLabel"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:text="15.00"
+            android:textColor="@color/textColor"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/km_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/distance"
+            android:layout_alignBottom="@+id/distance"
+            android:layout_toEndOf="@+id/distance"
+            android:layout_toRightOf="@+id/distance"
+            android:text="@string/distanceUnit"
+            android:textColor="@color/textColor"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/distanceIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/distanceLabel"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@+id/distance"
+            android:layout_toStartOf="@+id/distance"
+            android:src="@drawable/distance_icon" />
+
+    </RelativeLayout>
 
     <TextView
+        android:id="@+id/center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:id="@+id/center" />
+        android:text="" />
+
     <RelativeLayout
         android:id="@+id/start_time_layout"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/divider_top_bottom"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/distance_layout"
         android:layout_alignParentLeft="true"
+
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/distance_layout"
         android:layout_toLeftOf="@+id/center"
-        android:layout_toStartOf="@+id/center">
+        android:layout_toStartOf="@+id/center"
+        android:background="@drawable/divider">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/start_time_label"
-            android:text="START TIME"
-            android:textColor="@color/textColor"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12:30"
-            android:textColor="@color/textColor"
-            android:textSize="35sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/startTime"
+            android:textColor="@color/textColor" />
+
+        <TextView
+            android:id="@+id/startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/start_time_label"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:id="@+id/startTime" />
+            android:layout_marginBottom="20dp"
+            android:text="12:30"
+            android:textColor="@color/textColor"
+            android:textSize="35sp" />
+
         <ImageView
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/start_time_icon"
-            android:layout_toLeftOf="@+id/startTime"
-            android:layout_toStartOf="@+id/startTime"
+            android:layout_alignBottom="@+id/startTime"
             android:layout_alignTop="@+id/startTime"
-            android:layout_alignBottom="@+id/startTime" />
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="14dp"
+            android:layout_toLeftOf="@+id/start_time_label"
+            android:layout_toStartOf="@+id/start_time_label"
+            android:src="@drawable/start_time_icon" />
+
+
     </RelativeLayout>
+
     <RelativeLayout
+        android:id="@+id/stop_time_layout"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:id="@+id/stop_time_layout"
-        android:background="@drawable/divider_top_bottom"
+        android:layout_alignEnd="@+id/distance_layout"
+        android:layout_alignRight="@+id/distance_layout"
         android:layout_alignTop="@+id/start_time_layout"
         android:layout_toRightOf="@+id/center"
-        android:layout_alignRight="@+id/distance_layout"
-        android:layout_alignEnd="@+id/distance_layout">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="STOP TIME"
-            android:textColor="@color/textColor"
-            android:id="@+id/stop_time_label"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"/>
+        android:background="@drawable/divider">
 
         <TextView
+            android:id="@+id/stop_time_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="13:30"
-            android:textColor="@color/textColor"
-            android:textSize="35sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/stopTime"
+            android:textColor="@color/textColor" />
+
+        <TextView
+            android:id="@+id/stopTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/stop_time_label"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:id="@+id/stopTime" />
+            android:layout_marginBottom="20dp"
+            android:text="13:30"
+            android:textColor="@color/textColor"
+            android:textSize="35sp" />
+
         <ImageView
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/stop_time_icon"
+            android:layout_alignBottom="@+id/stopTime"
             android:layout_alignTop="@+id/stopTime"
-            android:layout_toLeftOf="@+id/stopTime"
-            android:layout_toStartOf="@+id/stopTime"
-            android:layout_alignBottom="@+id/stopTime" />
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_toLeftOf="@+id/stop_time_label"
+            android:layout_toStartOf="@+id/stop_time_label"
+            android:src="@drawable/stop_time_icon" />
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/divider_vertical" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/average_speed_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/divider_top_bottom"
-        android:layout_below="@+id/start_time_layout"
-        android:layout_marginTop="15dp"
-        android:id="@+id/average_speed_layout"
-        android:layout_alignRight="@+id/start_time_layout"
         android:layout_alignEnd="@+id/start_time_layout"
+
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/start_time_layout"
+        android:layout_below="@+id/start_time_layout"
+        android:background="@drawable/divider">
+
         <TextView
             android:id="@+id/average_speed_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AVERAGE SPEED"
-            android:textColor="@color/textColor"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="20dp"
+            android:text="@string/averageSpeed"
+            android:textColor="@color/textColor" />
+
         <TextView
             android:id="@+id/averageSpeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="17.00"
-            android:textColor="@color/textColor"
-            android:textSize="35sp"
             android:layout_below="@+id/average_speed_label"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="20dp"
+            android:text="17.00"
+            android:textColor="@color/textColor"
+            android:textSize="35sp" />
+
         <TextView
             android:id="@+id/kmh_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="KM/H"
-            android:textSize="11sp"
-            android:textColor="@color/textColor"
             android:layout_alignBaseline="@+id/averageSpeed"
             android:layout_alignBottom="@+id/averageSpeed"
+            android:layout_toEndOf="@+id/averageSpeed"
             android:layout_toRightOf="@+id/averageSpeed"
-            android:layout_toEndOf="@+id/averageSpeed" />
+            android:text="@string/averageSpeedUnit"
+            android:textColor="@color/textColor"
+            android:textSize="11sp" />
+
         <ImageView
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/average_speed_icon"
+            android:layout_alignBottom="@+id/averageSpeed"
             android:layout_alignTop="@+id/averageSpeed"
-            android:layout_toLeftOf="@+id/averageSpeed"
-            android:layout_toStartOf="@+id/averageSpeed"
-            android:layout_alignBottom="@+id/averageSpeed" />
+            android:layout_toLeftOf="@+id/average_speed_label"
+            android:layout_toStartOf="@+id/average_speed_label"
+            android:src="@drawable/average_speed_icon" />
 
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/total_time_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/divider_top_bottom"
-        android:id="@+id/total_time_layout"
-        android:layout_alignTop="@+id/average_speed_layout"
+        android:layout_alignEnd="@+id/stop_time_layout"
         android:layout_alignLeft="@+id/stop_time_layout"
-        android:layout_alignStart="@+id/stop_time_layout"
         android:layout_alignRight="@+id/stop_time_layout"
-        android:layout_alignEnd="@+id/stop_time_layout">
+        android:layout_alignStart="@+id/stop_time_layout"
+        android:layout_alignTop="@+id/average_speed_layout"
+        android:background="@drawable/divider">
+
         <TextView
             android:id="@+id/total_time_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TOTAL TIME"
-            android:textColor="@color/textColor"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="20dp"
+            android:text="@string/totalTime"
+            android:textColor="@color/textColor" />
 
         <TextView
             android:id="@+id/totalTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="60"
-            android:textColor="@color/textColor"
-            android:textSize="35sp"
             android:layout_below="@+id/total_time_label"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="60"
+            android:textColor="@color/textColor"
+            android:textSize="35sp" />
+
         <TextView
+            android:id="@+id/min_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MIN"
-            android:textSize="11sp"
-            android:textColor="@color/textColor"
-            android:id="@+id/min_label"
             android:layout_alignBaseline="@+id/totalTime"
             android:layout_alignBottom="@+id/totalTime"
-            android:layout_alignRight="@+id/total_time_label"
-            android:layout_alignEnd="@+id/total_time_label" />
+            android:layout_toEndOf="@+id/totalTime"
+            android:layout_toRightOf="@+id/totalTime"
+            android:text="@string/min"
+            android:textColor="@color/textColor"
+            android:textSize="11sp" />
+
         <ImageView
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/time"
+            android:layout_alignBottom="@+id/totalTime"
             android:layout_alignTop="@+id/totalTime"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/total_time_label"
             android:layout_toStartOf="@+id/total_time_label"
-            android:layout_alignBottom="@+id/totalTime" />
+            android:src="@drawable/time" />
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/divider_vertical" />
     </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/distance"
-        android:text="Distance"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/startTime"
-        android:text="Start Time"
-        android:layout_below="@+id/distance"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/stopTime"
-        android:text="Stop Time"
-        android:layout_below="@+id/startTime"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/averageSpeed"
-        android:text="Average Speed"
-        android:layout_below="@+id/stopTime"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/totalTime"
-        android:text="Total Time"
-        android:layout_below="@+id/averageSpeed"/>-->
 
 
 </RelativeLayout>

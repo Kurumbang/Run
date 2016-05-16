@@ -5,11 +5,18 @@
     <string name="stop">Stop</string>
     <string name="start">Start</string>
     <string name="timer">00:00:00</string>
-    <string name="title_activity_user_history_detail">UserHistoryDetail</string>
+    <string name="title_activity_user_history_detail">User History Detail</string>
     <string name="myTrips">My Trips</string>
-    <string name="distanceUnit">km</string>
-    <string name="averageSpeedUnit">km/h</string>
-    <string name="min">min</string>
+    <string name="distanceUnit">KM</string>
+    <string name="averageSpeedUnit">KM/H</string>
+    <string name="min">MIN</string>
     <string name="running">Running..</string>
+    <string name="changeNumber">Change Number</string>
+    <string name="enterNewNumber">Enter new number</string>
+    <string name="distance">DISTANCE</string>
+    <string name="startTime">START TIME</string>
+    <string name="stopTime">STOP TIME</string>
+    <string name="averageSpeed">AVERAGE SPEED</string>
+    <string name="totalTime">TOTAL TIME</string>
 
 </resources>

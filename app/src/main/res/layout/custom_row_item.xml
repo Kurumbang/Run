@@ -42,7 +42,7 @@
             android:id="@+id/kmLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="KM"
+            android:text="@string/distanceUnit"
             android:textSize="20sp"
             android:textColor="@color/textColor"
             android:layout_centerVertical="true"

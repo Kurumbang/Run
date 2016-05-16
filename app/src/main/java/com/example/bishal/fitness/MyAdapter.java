@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import java.util.List;
 
 /**
@@ -26,6 +29,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         mytypeface = Typeface.createFromAsset(context.getAssets(),"Oswald-Stencil.ttf");
     }
 
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_row_item, parent, false);
@@ -33,11 +37,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return holder;
     }
 
+
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final UserData current = userData.get(position);
+        //populating the list in reverse oder...
+        final UserData current = userData.get(getItemCount()- position - 1);
         holder.date.setText(current.getDate());
         holder.distance.setText(current.getDistance());
+        YoYo.with(Techniques.FadeIn).playOn(holder.cardView);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

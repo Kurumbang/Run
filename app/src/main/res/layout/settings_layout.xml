@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+
+    <TextView
+        android:id="@+id/settingsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/changeNumber"
+        android:textSize="17sp"
+        android:textColor="@color/textColor"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"/>
+    <ImageView
+        android:id="@+id/phoneIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/current_phone_number_icon"
+        android:layout_above="@+id/inputNewPhoneNumber"
+        android:layout_alignTop="@+id/currentPhoneNumber"
+        android:layout_marginRight="5dp"/>
+    <TextView
+        android:id="@+id/currentPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="17sp"
+        android:textColor="@color/textColor"
+        android:paddingTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/phoneIcon"
+        android:text="Current: "
+        android:layout_below="@+id/settingsTitle"
+        android:background="@drawable/divider"/>
+
+    <ImageView
+        android:id="@+id/editPhoneNumberIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/edit_number"
+        android:layout_below="@+id/phoneIcon"
+        android:layout_toLeftOf="@+id/currentPhoneNumber"
+        android:layout_toStartOf="@+id/currentPhoneNumber"
+        android:layout_alignBottom="@+id/inputNewPhoneNumber" />
+
+    <EditText
+        android:id="@+id/inputNewPhoneNumber"
+        android:layout_below="@+id/currentPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="phone"
+        android:ems="10"
+        android:textColor="@color/textColor"
+        android:layout_marginLeft="10dp"
+        android:hint="@string/enterNewNumber"
+        android:layout_gravity="center_horizontal"
+        style="@style/EditTextCustom"
+        android:layout_toRightOf="@+id/phoneIcon"
+        android:layout_toEndOf="@+id/phoneIcon" />
+</RelativeLayout>

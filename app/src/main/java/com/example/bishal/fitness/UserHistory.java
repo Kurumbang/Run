@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Collection;
 import java.util.List;
 
 public class UserHistory extends AppCompatActivity {
@@ -33,10 +34,10 @@ public class UserHistory extends AppCompatActivity {
         dbHandler = new MyDataBaseHandler(this);
 
         List<UserData> userDatas = dbHandler.getUserData();
-
         myAdapter = new MyAdapter(this,userDatas);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new VerticalSpace(5));
 
 
     }
