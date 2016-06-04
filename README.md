@@ -1,2 +1,4 @@
 # Software Engineering Project
 
+# This is one of the compulsory projects in our semester. The project here is to develope an android application for the users who mostly like to jog and run. The features of this app is to track the users speed distance travelled, users start time and stop time, user's total time spend, user's average speed and also all of his history records. This app also has a call feactures in case of any accident or threat. 
+# Note: The app is just for learning purpose. It is still in a development phase. It doesn't run smooth due to gps connectivity but most nevertheless it does its job. 
