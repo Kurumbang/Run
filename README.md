@@ -4,4 +4,4 @@ This is one of the compulsory projects in our sixth semester. The project here i
 #
 Note: The app is just for learning purpose. It is still in a development phase. It doesn't run smooth due to gps connectivity but nevertheless it does its job. Feel free to use it..
 #
-Download app: Click on app folder and then right click on app-release.apk then choose save link as and enjoy!!
+Download app: Click on <i>app</i> folder and then right click on <i>app-release.apk</i> then choose <i>save link as</i> and enjoy!!
