@@ -1,5 +1,9 @@
 package com.example.bishal.fitness;
 
+/**
+ * Created by Bishal on 4/6/2016.
+ */
+
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,12 +15,11 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private MapController mapController;
     private ItemizedOverlay<OverlayItem> mMyLocationOverlay;
     private DefaultResourceProxyImpl mResourceProxy;
-    private boolean startStopFlag = false;
+    private boolean startStopFlag;
     private static final String TAG = "com.example.bishal.fitness";
     private Intent intent;
     private TextView displaySpeed, displayDistance, status, timer;
@@ -61,18 +64,21 @@ public class MainActivity extends AppCompatActivity {
     private Typeface oswaldStencil, oswaldLight;
     private Animation slideUp, slideDown;
     double currentLatitude, currentLongitude, lastLatitude, lastLongitude, distanceTravelled;
+    public static final double DEFAULT_LATITUDE = 53.556556;
+    public static final double DEFAULT_LONGITUDE = 10.022079;
     float currentSpeed;
     MyDataBaseHandler dbHandler;
     DecimalFormat form = new DecimalFormat("0.00");
-    DecimalFormat form2 = new DecimalFormat("0.000000");
     String date;
     SimpleDateFormat simpleDateFormat;
     String start_Time;
     long startTime;
-    RelativeLayout controlBoard, upArrow, downArrow;
+    RelativeLayout controlBoard, upArrow;
+    ImageView downArrowIcon;
     public static final String DEFAULT = "N/A";
     String phoneNumber = DEFAULT;
     SharedPreferences sharedPreferences;
+    SharedPreferences locationSharedPreferences;
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -81,59 +87,84 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
+    //----------For Timer-----------------
+    long timeInMilliseconds,timeSwapBuff,updatedtime;
+    int hours, mins, secs, milliseconds;
+    Handler handler = new Handler();
+    //-------------------------------------
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         init();
         displayLocationOnTheMap(lastLatitude, lastLongitude);
-
-        startStopbtn.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkStartStopFlag()) {
-                    start_Time = simpleDateFormat.format(new Date());
-                    startTime = System.currentTimeMillis();
-                    intent = new Intent(getApplicationContext(), MyLocationService.class);
-                    startService(intent);
-                    startStopbtn.setText(R.string.stop);
-                    status.setText(R.string.running);
-                    registerReceiver(broadcastReceiver, new IntentFilter(MyLocationService.BROADCAST_ACTION));
-                } else {
-                    stopService(intent);
-                    startStopbtn.setText(R.string.start);
-                    status.setText(R.string.start);
-                    displaySpeed.setText("0.00 km/h");
-                    unregisterReceiver(broadcastReceiver);
-                    String stop_Time = simpleDateFormat.format(new Date());
-                    long total = TimeUnit.MILLISECONDS.toMinutes(System.currentTimeMillis() - startTime);
-                    float timeTakenInHours = (float) total / 60;
-                    float averageSpeed = (float) distanceTravelled / timeTakenInHours;
-
-                    UserData userData = new UserData(
-                            date, String.valueOf(form.format(distanceTravelled)),
-                            String.valueOf(form.format(averageSpeed)), start_Time,
-                            stop_Time, String.valueOf(total));
-                    dbHandler.addUserData(userData);
-                    dbHandler.close();
-
-
-                }
-            }
-        });
-
     }
+
+    public void startStopBtn(View view){
+        if (checkStartStopFlag()) {
+            start_Time = simpleDateFormat.format(new Date());
+            resetTimer();
+            startTime = System.currentTimeMillis();
+            handler.postDelayed(updateTimer, 0);
+            startStopbtn.setText(R.string.stop);
+            status.setText(R.string.running);
+            intent = new Intent(getApplicationContext(), MyLocationService.class);
+            startService(intent);
+            registerReceiver(broadcastReceiver, new IntentFilter(MyLocationService.BROADCAST_ACTION));
+
+        } else {
+            stopService(intent);
+            handler.removeCallbacks(updateTimer);
+            startStopbtn.setText(R.string.start);
+            status.setText(R.string.justRun);
+            displaySpeed.setText("0.00 km/h");
+            unregisterReceiver(broadcastReceiver);
+            String stop_Time = simpleDateFormat.format(new Date());
+            long total = TimeUnit.MILLISECONDS.toMinutes(System.currentTimeMillis() - startTime);
+            float timeTakenInHours = (float) total / 60;
+            float averageSpeed = (float) distanceTravelled / timeTakenInHours;
+            UserData userData = new UserData(
+                    date, String.valueOf(form.format(distanceTravelled)),
+                    String.valueOf(form.format(averageSpeed)), start_Time,
+                    stop_Time, String.valueOf(total));
+            dbHandler.addUserData(userData);
+            dbHandler.close();
+
+        }
+    }
+
+    public void resetTimer(){
+        startTime = 0L;
+        timeInMilliseconds = 0L;
+        timeSwapBuff = 0L;
+        updatedtime = 0L;
+        secs = 0;
+        mins = 0;
+        milliseconds = 0;
+        handler.removeCallbacks(updateTimer);
+        timer.setText(R.string.timer);
+    }
+    public Runnable updateTimer = new Runnable() {
+        public void run() {
+            timeInMilliseconds = System.currentTimeMillis() - startTime;
+            updatedtime = timeSwapBuff + timeInMilliseconds;
+            secs = (int) (updatedtime / 1000);
+            mins = secs / 60;
+            secs = secs % 60;
+            hours = mins / 60;
+            timer.setText("" + String.format("%02d", hours) + ":" + "" + String.format("%02d", mins) + ":" + String.format("%02d", secs));
+            handler.postDelayed(this, 0);
+        }
+    };
 
     public void emergencyCall(View view) {
         if(phoneNumber.equals(DEFAULT)){
             Toast.makeText(getApplicationContext(),"Invalid phone number please change it via settings ", Toast.LENGTH_LONG).show();
         }else{
             Intent callIntent = new Intent(Intent.ACTION_CALL);
-            String call = "tel:" + phoneNumber;
-            Log.v("kurumbang", call);
             callIntent.setData(Uri.parse("tel:" + phoneNumber));
             startActivity(callIntent);
         }
@@ -148,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
     public void init() {
         oswaldStencil = Typeface.createFromAsset(this.getAssets(), "Oswald-Stencil.ttf");
         oswaldLight = Typeface.createFromAsset(this.getAssets(), "Oswald-Light.ttf");
+        startStopFlag = false;
         mMapView = (MapView) findViewById(R.id.map);
         if (mMapView != null) {
             mMapView.setTileSource(TileSourceFactory.MAPNIK);
@@ -168,18 +200,23 @@ public class MainActivity extends AppCompatActivity {
         timer = (TextView) findViewById(R.id.timer);
         timer.setTypeface(oswaldStencil);
         marker = this.getResources().getDrawable(R.drawable.location);
-
         controlBoard = (RelativeLayout) findViewById(R.id.controlBoard);
         upArrow = (RelativeLayout) findViewById(R.id.upArrow);
-        downArrow = (RelativeLayout)findViewById(R.id.downArrow);
+        downArrowIcon = (ImageView)findViewById(R.id.downArrowIcon);
         slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
         slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
-
         dbHandler = new MyDataBaseHandler(getApplicationContext());
         date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         simpleDateFormat = new SimpleDateFormat("HH:mm");
+        //phone number.........
         SharedPreferences mysharedPreferences = getSharedPreferences("UserPhoneNumber", Context.MODE_PRIVATE);
-        phoneNumber = mysharedPreferences.getString("phoneNumber",DEFAULT);
+        phoneNumber = mysharedPreferences.getString("phoneNumber", DEFAULT);
+        //saving the last location......
+        SharedPreferences locationSharedPreferences = getSharedPreferences("LastLocation", Context.MODE_PRIVATE);
+        String latitude = locationSharedPreferences.getString("latitude", String.valueOf(DEFAULT_LATITUDE));
+        String longitude = locationSharedPreferences.getString("longitude",String.valueOf(DEFAULT_LONGITUDE));
+        lastLatitude = Double.valueOf(latitude);
+        lastLongitude = Double.valueOf(longitude);
 
     }
 
@@ -193,34 +230,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI(Intent intent) {
+
         //receives all the broadcast data here....
         currentLatitude = intent.getDoubleExtra("latitude", 0);
         currentLongitude = intent.getDoubleExtra("longitude", 0);
         currentSpeed = intent.getFloatExtra("speed", 0);
         distanceTravelled = intent.getDoubleExtra("distance", 0);
-
-        //set the text to current lat and lng speed and distance travelled...
-
-
+        //display speed and distance in UI...
         displaySpeed.setText(form.format(currentSpeed) + " km/h");
         displayDistance.setText(form.format(distanceTravelled) + " km");
 
         //function call to display map and the location
         displayLocationOnTheMap(currentLatitude, currentLongitude);
 
-
+        //storing the last location in the form of string double is not used in sharedPreferences so using in string form and while using it converting it to double
+        locationSharedPreferences = getSharedPreferences("LastLocation", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = locationSharedPreferences.edit();
+        editor.putString("latitude", String.valueOf(currentLatitude));
+        editor.putString("longitude", String.valueOf(currentLongitude));
+        editor.apply();
     }
 
     public void displayLocationOnTheMap(double latitude, double longitude) {
 
         GeoPoint currentLocation = new GeoPoint(latitude, longitude);
         mapController.setCenter(currentLocation);
+        mapController.setZoom(15);
         olItem = new OverlayItem("Here", "Current Position", currentLocation);
         olItem.setMarker(marker);
-        ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
+        ArrayList<OverlayItem> items = new ArrayList<>();
         items.clear();
         items.add(olItem);
-        this.mMyLocationOverlay = new ItemizedIconOverlay<OverlayItem>(items,
+        this.mMyLocationOverlay = new ItemizedIconOverlay<>(items,
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     @Override
                     public boolean onItemSingleTapUp(final int index,
@@ -347,8 +388,8 @@ public class MainActivity extends AppCompatActivity {
         controlBoard.startAnimation(slideUp);
         controlBoard.setVisibility(View.VISIBLE);
         if(controlBoard.getVisibility()==View.VISIBLE){
-            downArrow.startAnimation(slideDown);
-            downArrow.setVisibility(View.VISIBLE);
+            downArrowIcon.startAnimation(slideDown);
+            downArrowIcon.setVisibility(View.VISIBLE);
         }
     }
 
@@ -357,6 +398,6 @@ public class MainActivity extends AppCompatActivity {
         controlBoard.setVisibility(View.GONE);
         upArrow.startAnimation(slideUp);
         upArrow.setVisibility(View.VISIBLE);
-        downArrow.setVisibility(View.INVISIBLE);
+        downArrowIcon.setVisibility(View.INVISIBLE);
     }
 }

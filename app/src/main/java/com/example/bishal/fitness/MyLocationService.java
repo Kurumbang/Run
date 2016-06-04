@@ -17,7 +17,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.widget.Toast;
 
 
@@ -38,8 +37,8 @@ public class MyLocationService extends Service implements LocationListener {
 
     double lat_old = 0.0;
     double lon_old = 0.0;
-    double lat_new = 0;
-    double lon_new = 0;
+    double lat_new = 0.0;
+    double lon_new = 0.0;
     double distance;
 
     @Override
@@ -47,22 +46,6 @@ public class MyLocationService extends Service implements LocationListener {
         super.onCreate();
         intent = new Intent(BROADCAST_ACTION);
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-    }
-
-    public Location getLastLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return null;
-        } else {
-            Location lastlocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            return lastlocation;
-        }
     }
 
     @Nullable
@@ -123,6 +106,7 @@ public class MyLocationService extends Service implements LocationListener {
 
         lat_new = location.getLatitude();
         lon_new = location.getLongitude();
+
         if(lat_old == 0 && lon_old == 0){
             distance = 0;
         }else{

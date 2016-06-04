@@ -10,6 +10,7 @@
     <string name="distanceUnit">KM</string>
     <string name="averageSpeedUnit">KM/H</string>
     <string name="min">MIN</string>
+    <string name="justRun">Just Run !</string>
     <string name="running">Running..</string>
     <string name="changeNumber">Change Number</string>
     <string name="enterNewNumber">Enter new number</string>

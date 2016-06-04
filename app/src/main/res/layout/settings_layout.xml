@@ -33,7 +33,7 @@
         android:layout_toRightOf="@+id/phoneIcon"
         android:text="Current: "
         android:layout_below="@+id/settingsTitle"
-        android:background="@drawable/divider"/>
+        android:background="@drawable/divider_bottom"/>
 
     <ImageView
         android:id="@+id/editPhoneNumberIcon"

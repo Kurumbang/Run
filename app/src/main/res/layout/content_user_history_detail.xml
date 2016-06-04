@@ -82,7 +82,7 @@
         android:layout_below="@+id/distance_layout"
         android:layout_toLeftOf="@+id/center"
         android:layout_toStartOf="@+id/center"
-        android:background="@drawable/divider">
+        android:background="@drawable/divider_bottom">
 
         <TextView
             android:id="@+id/start_time_label"
@@ -126,7 +126,7 @@
         android:layout_alignRight="@+id/distance_layout"
         android:layout_alignTop="@+id/start_time_layout"
         android:layout_toRightOf="@+id/center"
-        android:background="@drawable/divider">
+        android:background="@drawable/divider_bottom">
 
         <TextView
             android:id="@+id/stop_time_label"
@@ -178,7 +178,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/start_time_layout"
         android:layout_below="@+id/start_time_layout"
-        android:background="@drawable/divider">
+        android:background="@drawable/divider_bottom">
 
         <TextView
             android:id="@+id/average_speed_label"
@@ -232,7 +232,7 @@
         android:layout_alignRight="@+id/stop_time_layout"
         android:layout_alignStart="@+id/stop_time_layout"
         android:layout_alignTop="@+id/average_speed_layout"
-        android:background="@drawable/divider">
+        android:background="@drawable/divider_bottom">
 
         <TextView
             android:id="@+id/total_time_label"

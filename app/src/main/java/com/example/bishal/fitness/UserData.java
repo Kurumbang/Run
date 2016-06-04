@@ -4,7 +4,6 @@ package com.example.bishal.fitness;
  * Created by Bishal on 4/30/2016.
  */
 public class UserData {
-    private int _id;
     private String date;
     private String distance;
     private String averageSpeed;
@@ -21,14 +20,6 @@ public class UserData {
         this.startTime = startTime;
         this.stopTime = stopTime;
         this.totalTime = totalTime;
-    }
-
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
     }
 
     public String getAverageSpeed() {
@@ -62,7 +53,6 @@ public class UserData {
     public void setTotalTime(String totalTime) {
         this.totalTime = totalTime;
     }
-
 
     public String getDate() {
         return date;
